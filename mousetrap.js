@@ -901,6 +901,11 @@
         return self;
     };
 
+    Mousetrap.prototype.on = function(keys, callback, action) {
+        var self = this;
+        return self.bind(keys, callback, action);
+    };
+
     /**
      * unbinds an event to mousetrap
      *
@@ -921,6 +926,11 @@
     Mousetrap.prototype.unbind = function(keys, action) {
         var self = this;
         return self.bind.call(self, keys, function() {}, action);
+    };
+
+    Mousetrap.prototype.off = function(keys,  action) {
+        var self = this;
+        return self.unbind(keys, action);
     };
 
     /**
@@ -1006,6 +1016,7 @@
 
     // expose mousetrap to the global object
     window.Mousetrap = Mousetrap;
+    window.$mt       = Mousetrap;
 
     // expose as a common js module
     if (typeof module !== 'undefined' && module.exports) {
